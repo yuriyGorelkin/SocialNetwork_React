@@ -1,0 +1,22 @@
+.nav {
+  grid-area: nav;
+  background-color: #ffd650;
+  padding: 20px;
+}
+
+
+
+.link {
+  color: darkred;
+  text-decoration: none;
+  padding: 3px 0;
+  display: block;
+}
+.link:hover {
+  background-color: red;
+  color: #ffffff;
+}
+
+.link.active {
+  color: #fff;
+}

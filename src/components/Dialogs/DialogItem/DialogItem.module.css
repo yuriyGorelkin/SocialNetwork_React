@@ -1,0 +1,8 @@
+.link {
+    text-decoration: none;
+    padding: 2px 0;
+    display: block;
+}
+.active {
+    color: yellow;
+}
