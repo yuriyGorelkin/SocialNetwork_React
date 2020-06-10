@@ -5,15 +5,17 @@ import * as axios from 'axios';
 
 
 const Users = (props) => {
-
-    if (props.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            props.setUsers(response.data.items);
-        });
+    let getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                props.setUsers(response.data.items);
+            });
+        }
     }
 
     return (
         <div>
+            <button onClick={getUsers}> get Users</button>
             {props.users.map(u => <div key={u.id}>
                 <div>
                     <div>
@@ -21,8 +23,12 @@ const Users = (props) => {
                              className={styles.userPhoto} alt="here will be user_avatar"/>
                     </div>
                     <div>
-                        {u.followed ? <button onClick={() => { props.unfollow(u.id)}}>Unfollow</button>
-                            : <button onClick={() => {props.follow(u.id)}}>Follow</button>
+                        {u.followed ? <button onClick={() => {
+                                props.unfollow(u.id)
+                            }}>Unfollow</button>
+                            : <button onClick={() => {
+                                props.follow(u.id)
+                            }}>Follow</button>
                         }
                     </div>
                 </div>
