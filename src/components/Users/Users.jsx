@@ -1,33 +1,15 @@
 import React from "react";
 import styles from './Users.module.css';
+import userPhoto from '../../application/images/userPhoto.png';
+import * as axios from 'axios';
+
 
 const Users = (props) => {
+
     if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: 0,
-                photoURL: 'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACBYbcG0NlNy7keubhdztLicf0tVpMvOpCNTHFFkrjD4GOT8SXrtdnwK4PIWmYtV7YtLsVEIIn3QUR5KJ5Nn7BBLk.jpg',
-                followed: false,
-                fullName: 'Yurii',
-                status: 'I am looking for a job',
-                location: {city: 'Zaporizhzhia', country: 'Ukraine'}
-            },
-            {
-                id: 1,
-                photoURL: 'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACBYbcG0NlNy7keubhdztLicf0tVpMvOpCNTHFFkrjD4GOT8SXrtdnwK4PIWmYtV7YtLsVEIIn3QUR5KJ5Nn7BBLk.jpg',
-                followed: true,
-                fullName: 'Alex',
-                status: 'I am a strikeball man',
-                location: {city: 'Kursk', country: 'Russia'}
-            },
-            {
-                id: 2,
-                photoURL: 'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACBYbcG0NlNy7keubhdztLicf0tVpMvOpCNTHFFkrjD4GOT8SXrtdnwK4PIWmYtV7YtLsVEIIn3QUR5KJ5Nn7BBLk.jpg',
-                followed: false,
-                fullName: 'Kostya',
-                status: 'I am crazy man',
-                location: {city: 'Yasinovataya', country: 'Ukraine'}
-            }]);
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            props.setUsers(response.data.items);
+        });
     }
 
     return (
@@ -35,26 +17,23 @@ const Users = (props) => {
             {props.users.map(u => <div key={u.id}>
                 <div>
                     <div>
-                        <img src={u.photoURL} className={styles.userPhoto} alt="here will be user_avatar"/>
+                        <img src={u.photos.small !== null ? u.photos.small : userPhoto}
+                             className={styles.userPhoto} alt="here will be user_avatar"/>
                     </div>
                     <div>
-                        {u.followed
-                            ? <button onClick={() => {
-                                props.unfollow(u.id)
-                            }}>Unfollow</button>
-                            : <button onClick={() => {
-                                props.follow(u.id)
-                            }}>Follow</button>}
+                        {u.followed ? <button onClick={() => { props.unfollow(u.id)}}>Unfollow</button>
+                            : <button onClick={() => {props.follow(u.id)}}>Follow</button>
+                        }
                     </div>
                 </div>
                 <div>
                     <div>
-                        <div>{u.fullName}</div>
+                        <div>{u.name}</div>
                         <div>{u.status}</div>
                     </div>
                     <div>
-                        <div>{u.location.country}</div>
-                        <div>{u.location.city}</div>
+                        <div>{'u.location.country'}</div>
+                        <div>{'u.location.city'}</div>
                     </div>
                 </div>
             </div>)
