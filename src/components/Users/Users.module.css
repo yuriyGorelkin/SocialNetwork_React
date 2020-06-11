@@ -1,4 +1,25 @@
+.user {
+    margin: 25px 8px;
+}
+
 .userPhoto {
     width: 70px;
     height: 90px;
+}
+
+.pageNumber {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #ffd650;
+    border-radius: 50%;
+    margin: 10px 5px 0 5px;
+}
+
+.selected {
+    font-weight: bold;
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: red;
+    border-radius: 50%;
+    margin: 10px 5px 0 5px;
 }
