@@ -20,7 +20,7 @@ ReactDOM.render(
 
 
 
-
+window.store = store;
 
 
 
