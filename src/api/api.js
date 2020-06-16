@@ -10,44 +10,45 @@ const instance = axios.create({
 });
 
 export const usersAPI = {
-    getUsers: (currentPage, pageSize) => {
-        return (
-            instance.get(`users?page=${currentPage}&count=${pageSize}`)
-                .then(response => {
-                    return response.data;
-                })
-        );
-    }
-}
-
-export const profileAPI = {
-    getUserProfile: (userID) => {
-        return (
-            instance.get(`profile/${userID}`)
-                .then(response => {
-                    return response.data;
-                })
-        );
-    }
-}
-
-
-export const followAPI = {
-    followUser: (userID) => {
-        return (
-            instance.post(`follow/${userID}`)
-                .then(response => {
-                    return response.data;
-                })
-        );
+    getUsers(currentPage, pageSize) {
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+            .then(response => {
+                return response.data;
+            })
     },
 
-    unfollowUser: (userID) => {
-        return (
-            instance.delete(`follow/${userID}`)
-                .then(response => {
-                    return response.data;
-                })
-        );
+    followUser(userID) {
+        return instance.post(`follow/${userID}`)
+            .then(response => {
+                return response.data;
+            })
+    },
+
+    unfollowUser(userID) {
+        return instance.delete(`follow/${userID}`)
+            .then(response => {
+                return response.data;
+            })
+    },
+
+    getProfile(userID) {
+        return instance.get(`profile/${userID}`)
+            .then(response => {
+                return response.data;
+            })
     }
 }
+
+
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    return response.data.data;
+                }
+            })
+    }
+}
+
+
