@@ -72,7 +72,7 @@ export default usersReducer;
 const followSuccess = (userID) => ({type: FOLLOW, userID: userID});
 const unfollowSuccess = (userID) => ({type: UNFOLLOW, userID: userID});
 const setUsers = (users) => ({type: SET_USERS, users: users});
-export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
+const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
 const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount});
 const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching});
 const toggleFollowingProgress = (isFetching, userID) => ({ type: TOGGLE_FOLLOWING_IN_PROGRESS, followingInProgress: isFetching, userID: userID});
@@ -80,6 +80,7 @@ const toggleFollowingProgress = (isFetching, userID) => ({ type: TOGGLE_FOLLOWIN
 // thunkCreators:
 export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
+        dispatch(setCurrentPage(currentPage));
         dispatch(toggleIsFetching(true));
 
         usersAPI.getUsers(currentPage, pageSize).then(data => {
@@ -93,6 +94,7 @@ export const getUsers = (currentPage, pageSize) => {
 export const follow = (userID)=> {
     return (dispatch)=> {
         dispatch(toggleFollowingProgress(true, userID));
+
         usersAPI.followUser(userID).then(data => {
             if (data.resultCode === 0) {
                 dispatch(followSuccess(userID));
@@ -105,6 +107,7 @@ export const follow = (userID)=> {
 export const unfollow = (userID)=> {
     return (dispatch)=> {
         dispatch(toggleFollowingProgress(true, userID));
+
         usersAPI.unfollowUser(userID).then(data => {
             if (data.resultCode === 0) {
                 dispatch(unfollowSuccess(userID));
