@@ -6,9 +6,8 @@ import profilePhoto from '../../../application/images/profileFoto.jpg';
 
 
 const ProfileInfo = (props) => {
-    if (!props.profile) {
-        return <Preloader/>
-    }
+
+    if (!props.profile) return <Preloader/>
 
     return (
         <div>

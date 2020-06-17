@@ -43,11 +43,6 @@ export const usersAPI = {
 export const authAPI = {
     me() {
         return instance.get(`auth/me`)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    return response.data.data;
-                }
-            })
     }
 }
 
