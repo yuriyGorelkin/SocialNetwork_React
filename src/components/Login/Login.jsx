@@ -1,17 +1,19 @@
 import React from "react";
 import {Field, reduxForm} from "redux-form";
-import {authAPI} from "../../api/api";
 import {Input} from "../Common/FormsControls/FormsControls";
 import {required} from "../../Utilits/Validators/Validators";
+import {connect} from "react-redux";
+import {loginUser} from "../../redux/auth-reducer";
+import {Redirect} from "react-router-dom";
 
 const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name='login' component={Input} placeholder='login' type='text' validate={required} />
+                <Field name='email' component={Input} placeholder='email' type='text' validate={required}/>
             </div>
             <div>
-                <Field name='password' component={Input}  placeholder='password' type='password' validate={required} />
+                <Field name='password' component={Input} placeholder='password' type='password' validate={required}/>
             </div>
             <div>
                 <Field name='rememberMe' component={Input} type='checkbox'/> Remember me
@@ -25,16 +27,13 @@ const LoginForm = (props) => {
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
 
-const Login = () => {
+const Login = (props) => {
+
     const onSubmit = (formData) => {
-        console.log(formData);
-        authAPI.logIn(formData.login, formData.password, formData.rememberMe)
-            .then((response)=> {
-                if (response.data.resultCode === 0) {
-                    // let myID = response.data.userID;
-               }
-            })
+        props.loginUser(formData.email, formData.password, formData.rememberMe);
     }
+
+    if (props.isAuth) return <Redirect to={'/profile'}/>
 
     return (
         <>
@@ -44,4 +43,9 @@ const Login = () => {
     );
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+});
+
+
+export default connect(mapStateToProps, {loginUser})(Login);
