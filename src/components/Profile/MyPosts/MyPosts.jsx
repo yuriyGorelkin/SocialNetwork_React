@@ -10,8 +10,8 @@ const MyPosts = (props) => {
     let postsElements = props.posts.map(post => <MyPost message={post.message} likesCount={post.likesCount}
                                                         key={post.id}/>);
 
-    const addNewPost = (formData) => {
-        props.addPost(formData.newPostText);
+    const addNewPost = (values) => {
+        props.addPost(values.newPostText);
     };
 
     return (
