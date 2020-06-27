@@ -8,7 +8,7 @@ import AddNewPostForm from './PostsForm/AddNewPostsForm';
 const MyPosts = (props) => {
 
     let postsElements = props.posts.map(post => <MyPost message={post.message} likesCount={post.likesCount}
-                                                        key={post.id}/>);
+                                                        key={post.id}/>).reverse();
 
     const addNewPost = (values) => {
         props.addPost(values.newPostText);

@@ -1,19 +1,19 @@
 import React from "react";
-import style from './ProfileInfo.module.css';
+import styles from './ProfileInfo.module.css';
 import Preloader from "../../Common/Preloader/Preloader";
 import profilePhoto from '../../../application/images/profileFoto.jpg';
 import ProfileStatusWithHooks from "../ProfileStatusWithHooks";
 
+const ProfileInfo = ({profile, status, updateStatus}) => {
 
-const ProfileInfo = (props) => {
-    if (!props.profile) return <Preloader/>
+    if (!profile) return <Preloader/>
 
     return (
         <div>
-            <div className={style.descriptionInfo}>
-                <img src={props.profile.photos.large !== null ? props.profile.photos.large : profilePhoto} alt="here will be profilePhoto"/>
-                <div> {props.profile.fullName} </div>
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
+            <div className={styles.descriptionInfo}>
+                <img src={profile.photos.large !== null ? profile.photos.large : profilePhoto} className={styles.img} alt="here will be profilePhoto"/>
+                <div> {profile.fullName} </div>
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
             </div>
         </div>
     );

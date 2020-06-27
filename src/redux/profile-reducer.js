@@ -4,7 +4,7 @@ const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
-let initialState = {
+const initialState = {
     posts: [
         {id: 0, message: 'Hey, how are you?', likesCount: '5'},
         {id: 1, message: 'I am fine!', likesCount: '7'}
@@ -15,7 +15,7 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-       case ADD_POST:
+        case ADD_POST:
             return {
                 ...state,
                 posts: [...state.posts, {id: 2, message: action.newPostText, likesCount: '0'}]
@@ -41,31 +41,20 @@ const setStatus = (status) => ({type: SET_STATUS, status: status});
 
 
 // thunkCreators:
-export const getUserProfile = (userID) => {
-    return (dispatch) => {
-        profileAPI.getProfile(userID)
-            .then(data => {
-                dispatch(setUserProfile(data));
-            });
-    }
+export const getUserProfile = (userID) => async (dispatch) => {
+    const data = await profileAPI.getProfile(userID);
+    dispatch(setUserProfile(data));
 }
 
-export const getStatus = (userID) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userID)
-            .then(data => {
-                dispatch(setStatus(data));
-            });
-    }
+export const getStatus = (userID) => async (dispatch) => {
+    const data = await profileAPI.getStatus(userID);
+    dispatch(setStatus(data));
 }
 
-export const updateStatus = (status) => {
-    return (dispatch) => {
-        profileAPI.updateStatus(status)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(setStatus(status));
-                }
-            });
+export const updateStatus = (status) => async (dispatch) => {
+    const response = await profileAPI.updateStatus(status);
+
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status));
     }
 }

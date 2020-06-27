@@ -5,6 +5,7 @@ import {Textarea} from "../../../Common/FormsControls/FormsControls";
 
 
 let AddNewPostForm = (props) => {
+
     return (
         <form onSubmit={props.handleSubmit}>
             <div>

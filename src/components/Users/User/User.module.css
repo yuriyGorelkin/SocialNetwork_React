@@ -1,0 +1,10 @@
+.user {
+    margin: 25px 8px;
+    cursor: pointer;
+}
+
+.userPhoto {
+    width: 70px;
+    height: 90px;
+}
+
