@@ -3,7 +3,6 @@ import styles from "./ProfileInfo.module.css";
 
 const ProfileData = ({profile, goToEditMode}) => {
     return <div>
-        <div><button onClick={goToEditMode}>Edit</button></div>
         <div>
             <b>Full Name:</b> {profile.fullName}
         </div>
@@ -23,6 +22,7 @@ const ProfileData = ({profile, goToEditMode}) => {
             return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
         })}
         </div>
+        <div><button onClick={goToEditMode}>Edit</button></div>
     </div>
 }
 
