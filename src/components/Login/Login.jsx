@@ -15,7 +15,7 @@ const Login = (props) => {
     return (
         <>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit} captcha={props.captchaURL} />
+            <LoginReduxForm onSubmit={onSubmit} captchaURL={props.captchaURL} />
         </>
     );
 }

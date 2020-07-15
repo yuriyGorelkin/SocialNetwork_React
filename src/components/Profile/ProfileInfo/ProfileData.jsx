@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ProfileInfo.module.css";
 
-const ProfileData = ({profile, goToEditMode}) => {
+const ProfileData = ({ profile, goToEditMode, isOwner }) => {
     return <div>
         <div>
             <b>Full Name:</b> {profile.fullName}
@@ -10,19 +10,21 @@ const ProfileData = ({profile, goToEditMode}) => {
             <b>Looking for a job:</b> {profile.lookingForAJob ? 'yes' : 'no'}
         </div>
         {profile.lookingForAJob &&
-        <div>
-            <b>My professional skills:</b> {profile.lookingForAJobDescription}
-        </div>
+            <div>
+                <b>My professional skills:</b> {profile.lookingForAJobDescription}
+            </div>
         }
         <div>
             <b>About me:</b> {profile.aboutMe}
         </div>
         <div>
             <b>My contacts:</b> {Object.keys(profile.contacts).map(key => {
-            return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
-        })}
+                return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
+            })}
         </div>
-        <div><button onClick={goToEditMode}>Edit</button></div>
+        {isOwner &&
+            <div><button onClick={goToEditMode}>Edit</button></div>
+        }
     </div>
 }
 

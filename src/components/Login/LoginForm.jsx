@@ -1,11 +1,11 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { Input } from "../Common/FormsControls/FormsControls";
-import { required } from "../../Utilits/Validators/Validators";
+import { required } from "../../utilits/validators/validators";
 import styles from '../Common/FormsControls/FormsControls.module.css'
 
 
-const LoginForm = ({ handleSubmit, error, captcha }) => {
+const LoginForm = ({ handleSubmit, error, captchaURL }) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -21,10 +21,10 @@ const LoginForm = ({ handleSubmit, error, captcha }) => {
                 <Field name='rememberMe' component={Input} type='checkbox' /> Remember me
             </div>
             {
-                captcha && <img src={captcha} alt='here will be captcha' />
+                captchaURL && <img src={captchaURL} alt='here will be captcha' />
             }
             {
-                captcha && <Field name='captcha' component={Input} placeholder='simbols from captcha' type='text' validate={required} />
+                captchaURL && <Field name='captcha' component={Input} placeholder='simbols from captcha' type='text' validate={required} />
             }
             <button type='submit'>Login</button>
         </form>

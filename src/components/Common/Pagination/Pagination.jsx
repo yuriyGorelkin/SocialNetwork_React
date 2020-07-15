@@ -1,5 +1,6 @@
-import React, {useState} from "react";
-import styles from "./Pagination.module.css";
+import React, {useState} from 'react';
+import styles from './Pagination.module.css';
+import cn from 'classnames';
 
 
 const Pagination = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => {
@@ -19,19 +20,21 @@ const Pagination = ({totalItemsCount, pageSize, currentPage, onPageChanged, port
 
     return <div>
         {portionNumber > 1 &&
-        <button className={styles.btn} onClick={() => setPortionNumber(portionNumber - 1)}>&#9668; Prev</button>
+            <button className={styles.btn}
+                    onClick={() => setPortionNumber(portionNumber - 1)}>&#9668; Prev</button>
         }
 
         {pages
             .filter(page => page >= leftPortionPageNumber && page <= rightPortionPageNumber)
             .map(page => {
-                return <span className={currentPage === page ? styles.selected : styles.pageNumber}
+                return <span className={cn(styles.pageNumber, { [styles.selected]: currentPage === page })}
                              key={page}
                              onClick={() => onPageChanged(page)}> {page} </span>
             })}
 
         {portionCount > portionNumber &&
-        <button className={styles.btn}  onClick={() => setPortionNumber(portionNumber + 1)}>&#9658; Next</button>
+            <button className={styles.btn}
+                    onClick={() => setPortionNumber(portionNumber + 1)}>&#9658; Next</button>
         }
     </div>
 }
