@@ -12,7 +12,7 @@
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
     "@types/redux-form": "^8.2.7",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "final-form": "^4.20.0",
     "react": "^16.13.1",
